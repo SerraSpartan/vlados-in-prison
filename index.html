@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Владос под следствием</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+header {
+    padding: 30px;
+    background: #ff0000;
+    font-size: 28px;
+    font-weight: bold;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    from { background: #ff0000; }
+    to { background: #990000; }
+}
+
+img {
+    margin-top: 20px;
+    width: 220px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px red;
+}
+
+.container {
+    padding: 30px 15px;
+}
+
+.reason-box {
+    margin-top: 20px;
+    font-size: 20px;
+    min-height: 50px;
+    transition: 0.3s;
+}
+
+button {
+    margin: 10px;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: red;
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: darkred;
+}
+
+.counter {
+    margin-top: 25px;
+    font-size: 18px;
+    color: #ffaaaa;
+}
+
+.fake-law {
+    margin-top: 30px;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 15px;
+    background: black;
+    font-size: 14px;
+}
+canvas {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>🚔 Владос официально под следствием 🚔</header>
+
+<img src="IMG_6164.jpeg" alt="Фото подозреваемого">
+
+<div class="container">
+
+<div class="reason-box" id="reason">
+Нажми кнопку чтобы раскрыть преступление...
+</div>
+
+<button onclick="generateReason()">🎲 Новая причина</button>
+<button onclick="emergencyMode()">🚨 Экстренный режим</button>
+
+<div class="counter">
+⏳ Дней до ареста: <span id="days"></span>
+</div>
+
+<div class="fake-law">
+⚖️ Статья 1337 УК РФ — «Чрезмерная харизма и использование ChatGPT с превышением допустимой скорости»
+</div>
+
+</div>
+
+<footer>
+Сайт создан за 10 минут. Друг повержен 😎
+</footer>
+
+<canvas id="confetti"></canvas>
+
+<script>
+const reasons = [
+"Украл последний кусок пиццы 🍕",
+"Подозрительно быстро отвечает в чате 💬",
+"Слишком хорошо шарит в технологиях 🤖",
+"Использует ChatGPT на максималках 🚀",
+"Слишком опасно шутит 😈",
+"Хранит мемы стратегического назначения 📁",
+"Говорит «щас сделаю» уже 3 года ⏳",
+"Слишком харизматичен для общества 😎",
+"Перепарковался на 2 сантиметра левее 🚗",
+"Знает слишком много секретов 🤫"
+];
+
+function generateReason() {
+    const random = reasons[Math.floor(Math.random() * reasons.length)];
+    document.getElementById("reason").innerText = random;
+    launchConfetti();
+}
+
+function emergencyMode() {
+    document.body.style.background = "black";
+    alert("🚨 Владос объявлен в федеральный розыск за чрезмерную мощность 🚨");
+    launchConfetti();
+}
+
+const arrestDate = new Date();
+arrestDate.setDate(arrestDate.getDate() + 73);
+
+function updateCounter() {
+    const now = new Date();
+    const diff = arrestDate - now;
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("days").innerText = days;
+}
+
+updateCounter();
+
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function launchConfetti() {
+    for (let i = 0; i < 100; i++) {
+        ctx.fillStyle = "hsl(" + Math.random() * 360 + ",100%,50%)";
+        ctx.beginPath();
+        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+</script>
+
+</body>
+</html>
